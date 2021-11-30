@@ -1,7 +1,7 @@
 # aris_map
 
 A new Flutter project.
-1.2
+1.3
 ## Getting Started
 
 This project is a starting point for a Flutter application.
