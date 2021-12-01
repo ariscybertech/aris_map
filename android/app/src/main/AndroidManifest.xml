@@ -9,6 +9,12 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="places_autocomplete"
         android:icon="@mipmap/ic_launcher">
+       <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
+        <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+       </intent-filter>
+        </receiver>
+        <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -47,4 +53,7 @@
                    android:value="AIzaSyAjFXwHh7boEVcivQZ72KgqZa_Tx0J8U0g"/>
     </application>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 </manifest>

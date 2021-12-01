@@ -1,7 +1,10 @@
 import 'dart:async';
 
+import 'package:aris_map/aris/notifications/notification.dart';
+import 'package:aris_map/aris/widgets/notification_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:aris_map/aris/blocs/application_bloc.dart';
 import 'package:aris_map/aris/models/place.dart';
@@ -25,9 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final applicationBloc =
         Provider.of<ApplicationBloc>(context, listen: false);
 
-
     //Listen for selected Location
-    locationSubscription = applicationBloc.selectedLocation.stream.listen((place) {
+    locationSubscription =
+        applicationBloc.selectedLocation.stream.listen((place) {
       if (place != null) {
         _locationController.text = place.name;
         _goToPlace(place);
@@ -41,8 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     super.initState();
   }
-
-
 
   @override
   void dispose() {
@@ -136,45 +137,45 @@ class _HomeScreenState extends State<HomeScreen> {
                           label: Text('Campground'),
                           onSelected: (val) => applicationBloc.togglePlaceType(
                               'campground', val),
-                          selected:
-                              applicationBloc.placeType  =='campground',
+                          selected: applicationBloc.placeType == 'campground',
                           selectedColor: Colors.blue,
                         ),
                         FilterChip(
                             label: Text('Locksmith'),
                             onSelected: (val) => applicationBloc
                                 .togglePlaceType('locksmith', val),
-                            selected: applicationBloc.placeType  =='locksmith',
+                            selected: applicationBloc.placeType == 'locksmith',
                             selectedColor: Colors.blue),
                         FilterChip(
                             label: Text('Pharmacy'),
                             onSelected: (val) => applicationBloc
                                 .togglePlaceType('pharmacy', val),
-                            selected:
-                            applicationBloc.placeType  =='pharmacy',
+                            selected: applicationBloc.placeType == 'pharmacy',
                             selectedColor: Colors.blue),
                         FilterChip(
                             label: Text('Pet Store'),
                             onSelected: (val) => applicationBloc
                                 .togglePlaceType('pet_store', val),
-                            selected: applicationBloc.placeType  =='pet_store',
+                            selected: applicationBloc.placeType == 'pet_store',
                             selectedColor: Colors.blue),
                         FilterChip(
                             label: Text('Lawyer'),
                             onSelected: (val) =>
-                                applicationBloc
-                                    .togglePlaceType('lawyer', val),
-                            selected:
-                            applicationBloc.placeType  =='lawyer',
+                                applicationBloc.togglePlaceType('lawyer', val),
+                            selected: applicationBloc.placeType == 'lawyer',
                             selectedColor: Colors.blue),
                         FilterChip(
                             label: Text('Bank'),
                             onSelected: (val) =>
-                                applicationBloc
-                                    .togglePlaceType('bank', val),
-                            selected:
-                            applicationBloc.placeType  =='bank',
+                                applicationBloc.togglePlaceType('bank', val),
+                            selected: applicationBloc.placeType == 'bank',
                             selectedColor: Colors.blue),
+                        Consumer<NotificationService>(
+                          builder: (context, model, _) => ElevatedButton(
+                            onPressed: () => model.imageNotification(),
+                            child: Text('Text'),
+                          ),
+                        ),
                       ],
                     ),
                   )

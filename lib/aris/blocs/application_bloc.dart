@@ -89,8 +89,6 @@ class ApplicationBloc with ChangeNotifier {
     }
   }
 
-
-
 @override
 void dispose() {
   selectedLocation.close();
