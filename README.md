@@ -1,7 +1,5 @@
 # Flutter Aris Map Application
 
-![Mobile Screenshot](screenshots/screenshot.png)
-![Mobile Screenshot2](screenshots/screenshot2.png)
 ![Mobile Screenshot3](screenshots/screen.gif)
 
 ## Getting Started
