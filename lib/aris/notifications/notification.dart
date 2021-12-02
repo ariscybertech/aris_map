@@ -44,7 +44,7 @@ class NotificationService extends ChangeNotifier {
     var bigPicture = BigPictureStyleInformation(
         DrawableResourceAndroidBitmap("@mipmap/ic_launcher"),
         largeIcon: DrawableResourceAndroidBitmap("@mipmap/ic_launcher"),
-        contentTitle: "Demo image notification",
+        contentTitle: "Aris Map notification",
         summaryText: "This is some text",
         htmlFormatContent: true,
         htmlFormatContentTitle: true);

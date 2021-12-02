@@ -1,9 +1,10 @@
 import 'package:aris_map/aris/blocs/application_bloc.dart';
 import 'package:aris_map/aris/notifications/notification.dart';
+import 'package:aris_map/aris/screens/splash_screen.dart';
 import 'package:aris_map/aris/widgets/notification_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:aris_map/aris/screens/home_screen.dart';
+import 'package:aris_map/aris/screens/aris.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 
@@ -11,10 +12,10 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
 void main() async {
-  runApp(MyApp());
+  runApp(ArisApp());
 }
 
-class MyApp extends StatelessWidget {
+class ArisApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,21 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
-        home: HomeScreen(),
+        theme: ThemeData(
+          brightness: Brightness.light,
+          /* light theme settings */
+        ),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          /* dark theme settings */
+        ),
+        themeMode: ThemeMode.dark,
+        /* ThemeMode.system to follow system theme, 
+         ThemeMode.light for light theme, 
+         ThemeMode.dark for dark theme
+        */
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen(),
       ),
     );
   }

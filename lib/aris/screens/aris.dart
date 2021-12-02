@@ -10,14 +10,14 @@ import 'package:aris_map/aris/blocs/application_bloc.dart';
 import 'package:aris_map/aris/models/place.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  HomeScreen({Key key}) : super(key: key);
+class Aris extends StatefulWidget {
+  Aris({Key key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _ArisState createState() => _ArisState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _ArisState extends State<Aris> {
   Completer<GoogleMapController> _mapController = Completer();
   StreamSubscription locationSubscription;
   StreamSubscription boundsSubscription;
@@ -68,34 +68,44 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _locationController,
-                      textCapitalization: TextCapitalization.words,
-                      decoration: InputDecoration(
-                        hintText: 'Search by City',
-                        suffixIcon: Icon(Icons.search),
-                      ),
-                      onChanged: (value) => applicationBloc.searchPlaces(value),
-                      onTap: () => applicationBloc.clearSelectedLocation(),
+                    child: Consumer<NotificationService>(
+                      builder: (context, model, _) => InkWell(
+                          onTap: () => model.imageNotification(),
+                          child: TextField(
+                            controller: _locationController,
+                            textCapitalization: TextCapitalization.words,
+                            decoration: InputDecoration(
+                              hintText: 'Search by City',
+                              suffixIcon: Icon(Icons.search),
+                            ),
+                            onChanged: (value) => applicationBloc.searchPlaces(value),
+                            onTap: () => applicationBloc.clearSelectedLocation(),
+                          ),
+                        ),
                     ),
                   ),
                   Stack(
                     children: [
-                      Container(
-                        height: 630.0,
-                        child: GoogleMap(
-                          mapType: MapType.normal,
-                          myLocationEnabled: true,
-                          initialCameraPosition: CameraPosition(
-                            target: LatLng(
-                                applicationBloc.currentLocation.latitude,
-                                applicationBloc.currentLocation.longitude),
-                            zoom: 14,
+                      Consumer<NotificationService>(
+                        builder: (context, model, _) => InkWell(
+                          onTap: () => model.imageNotification(),
+                          child: Container(
+                            height: 630.0,
+                            child: GoogleMap(
+                              mapType: MapType.normal,
+                              myLocationEnabled: true,
+                              initialCameraPosition: CameraPosition(
+                                target: LatLng(
+                                    applicationBloc.currentLocation.latitude,
+                                    applicationBloc.currentLocation.longitude),
+                                zoom: 14,
+                              ),
+                              onMapCreated: (GoogleMapController controller) {
+                                _mapController.complete(controller);
+                              },
+                              markers: Set<Marker>.of(applicationBloc.markers),
+                            ),
                           ),
-                          onMapCreated: (GoogleMapController controller) {
-                            _mapController.complete(controller);
-                          },
-                          markers: Set<Marker>.of(applicationBloc.markers),
                         ),
                       ),
                       if (applicationBloc.searchResults != null &&
@@ -180,7 +190,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   )
                 ],
-              ));
+              ),
+              );
   }
 
   Future<void> _goToPlace(Place place) async {
