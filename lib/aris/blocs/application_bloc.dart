@@ -58,7 +58,7 @@ class ApplicationBloc with ChangeNotifier {
     selectedLocation.add(null);
     selectedLocationStatic = null;
     searchResults = null;
-    placeType = null;
+    placeType = null; 
     notifyListeners();
   }
 

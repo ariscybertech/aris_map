@@ -64,133 +64,144 @@ class _ArisState extends State<Aris> {
             ? Center(
                 child: CircularProgressIndicator(),
               )
-            : ListView(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Consumer<NotificationService>(
-                      builder: (context, model, _) => InkWell(
-                          onTap: () => model.imageNotification(),
-                          child: TextField(
-                            controller: _locationController,
-                            textCapitalization: TextCapitalization.words,
-                            decoration: InputDecoration(
-                              hintText: 'Search by City',
-                              suffixIcon: Icon(Icons.search),
-                            ),
-                            onChanged: (value) => applicationBloc.searchPlaces(value),
-                            onTap: () => applicationBloc.clearSelectedLocation(),
-                          ),
-                        ),
-                    ),
-                  ),
-                  Stack(
+            : Consumer<NotificationService>(
+              builder: (context, model, _) =>
+              GestureDetector(
+                onTap: () {
+                  model.imageNotification();
+                },
+                child: ListView(
                     children: [
-                      Consumer<NotificationService>(
-                        builder: (context, model, _) => InkWell(
-                          onTap: () => model.imageNotification(),
-                          child: Container(
-                            height: 630.0,
-                            child: GoogleMap(
-                              mapType: MapType.normal,
-                              myLocationEnabled: true,
-                              initialCameraPosition: CameraPosition(
-                                target: LatLng(
-                                    applicationBloc.currentLocation.latitude,
-                                    applicationBloc.currentLocation.longitude),
-                                zoom: 14,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Consumer<NotificationService>(
+                          builder: (context, model, _) => InkWell(
+                              onTap: () => model.imageNotification(),
+                              child: TextField(
+                                controller: _locationController,
+                                textCapitalization: TextCapitalization.words,
+                                decoration: InputDecoration(
+                                  hintText: 'Search by City',
+                                  suffixIcon: Icon(Icons.search),
+                                ),
+                                onChanged: (value) => applicationBloc.searchPlaces(value),
+                                onTap: () => applicationBloc.clearSelectedLocation(),
                               ),
-                              onMapCreated: (GoogleMapController controller) {
-                                _mapController.complete(controller);
-                              },
-                              markers: Set<Marker>.of(applicationBloc.markers),
                             ),
-                          ),
                         ),
                       ),
-                      if (applicationBloc.searchResults != null &&
-                          applicationBloc.searchResults.length != 0)
-                        Container(
-                            height: 300.0,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(.6),
-                                backgroundBlendMode: BlendMode.darken)),
-                      if (applicationBloc.searchResults != null)
-                        Container(
-                          height: 300.0,
-                          child: ListView.builder(
-                              itemCount: applicationBloc.searchResults.length,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  title: Text(
-                                    applicationBloc
-                                        .searchResults[index].description,
-                                    style: TextStyle(color: Colors.white),
+                      Stack(
+                        children: [
+                          Consumer<NotificationService>(
+                            builder: (context, model, _) => InkWell(
+                              onTap: () => model.imageNotification(),
+                              child: Container(
+                                height: 630.0,
+                                child: GoogleMap(
+                                  mapType: MapType.normal,
+                                  myLocationEnabled: true,
+                                  initialCameraPosition: CameraPosition(
+                                    target: LatLng(
+                                        applicationBloc.currentLocation.latitude,
+                                        applicationBloc.currentLocation.longitude),
+                                    zoom: 14,
                                   ),
-                                  onTap: () {
-                                    applicationBloc.setSelectedLocation(
-                                        applicationBloc
-                                            .searchResults[index].placeId);
+                                  onMapCreated: (GoogleMapController controller) {
+                                    _mapController.complete(controller);
                                   },
-                                );
-                              }),
-                        ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Wrap(
-                      spacing: 8.0,
-                      children: [
-                        FilterChip(
-                          label: Text('Campground'),
-                          onSelected: (val) => applicationBloc.togglePlaceType(
-                              'campground', val),
-                          selected: applicationBloc.placeType == 'campground',
-                          selectedColor: Colors.blue,
-                        ),
-                        FilterChip(
-                            label: Text('Locksmith'),
-                            onSelected: (val) => applicationBloc
-                                .togglePlaceType('locksmith', val),
-                            selected: applicationBloc.placeType == 'locksmith',
-                            selectedColor: Colors.blue),
-                        FilterChip(
-                            label: Text('Pharmacy'),
-                            onSelected: (val) => applicationBloc
-                                .togglePlaceType('pharmacy', val),
-                            selected: applicationBloc.placeType == 'pharmacy',
-                            selectedColor: Colors.blue),
-                        FilterChip(
-                            label: Text('Pet Store'),
-                            onSelected: (val) => applicationBloc
-                                .togglePlaceType('pet_store', val),
-                            selected: applicationBloc.placeType == 'pet_store',
-                            selectedColor: Colors.blue),
-                        FilterChip(
-                            label: Text('Lawyer'),
-                            onSelected: (val) =>
-                                applicationBloc.togglePlaceType('lawyer', val),
-                            selected: applicationBloc.placeType == 'lawyer',
-                            selectedColor: Colors.blue),
-                        FilterChip(
-                            label: Text('Bank'),
-                            onSelected: (val) =>
-                                applicationBloc.togglePlaceType('bank', val),
-                            selected: applicationBloc.placeType == 'bank',
-                            selectedColor: Colors.blue),
-                        Consumer<NotificationService>(
-                          builder: (context, model, _) => ElevatedButton(
-                            onPressed: () => model.imageNotification(),
-                            child: Text('Text'),
+                                  markers: Set<Marker>.of(applicationBloc.markers),
+                                ),
+                              ),
+                            ),
+                          ),
+                          if (applicationBloc.searchResults != null &&
+                              applicationBloc.searchResults.length != 0)
+                            Container(
+                                height: 300.0,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(.6),
+                                    backgroundBlendMode: BlendMode.darken)),
+                          if (applicationBloc.searchResults != null)
+                            Container(
+                              height: 300.0,
+                              child: ListView.builder(
+                                  itemCount: applicationBloc.searchResults.length,
+                                  itemBuilder: (context, index) {
+                                    return ListTile(
+                                      title: Text(
+                                        applicationBloc
+                                            .searchResults[index].description,
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      onTap: () {
+                                        applicationBloc.setSelectedLocation(
+                                            applicationBloc
+                                                .searchResults[index].placeId);
+                                      },
+                                    );
+                                  }),
+                            ),
+                        ],
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Wrap(
+                            spacing: 8.0,
+                            children: [
+                              FilterChip(
+                                label: Text('Campground'),
+                                onSelected: (val) => applicationBloc.togglePlaceType(
+                                    'campground', val),
+                                selected: applicationBloc.placeType == 'campground',
+                                selectedColor: Colors.blue,
+                              ),
+                              FilterChip(
+                                  label: Text('Locksmith'),
+                                  onSelected: (val) => applicationBloc
+                                      .togglePlaceType('locksmith', val),
+                                  selected: applicationBloc.placeType == 'locksmith',
+                                  selectedColor: Colors.blue),
+                              FilterChip(
+                                  label: Text('Pharmacy'),
+                                  onSelected: (val) => applicationBloc
+                                      .togglePlaceType('pharmacy', val),
+                                  selected: applicationBloc.placeType == 'pharmacy',
+                                  selectedColor: Colors.blue),
+                              FilterChip(
+                                  label: Text('Pet Store'),
+                                  onSelected: (val) => applicationBloc
+                                      .togglePlaceType('pet_store', val),
+                                  selected: applicationBloc.placeType == 'pet_store',
+                                  selectedColor: Colors.blue),
+                              FilterChip(
+                                  label: Text('Lawyer'),
+                                  onSelected: (val) =>
+                                      applicationBloc.togglePlaceType('lawyer', val),
+                                  selected: applicationBloc.placeType == 'lawyer',
+                                  selectedColor: Colors.blue),
+                              FilterChip(
+                                  label: Text('Bank'),
+                                  onSelected: (val) =>
+                                      applicationBloc.togglePlaceType('bank', val),
+                                  selected: applicationBloc.placeType == 'bank',
+                                  selectedColor: Colors.blue),
+                              Consumer<NotificationService>(
+                                builder: (context, model, _) => ElevatedButton(
+                                  onPressed: () => model.imageNotification(),
+                                  child: Text('Text'),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  )
-                ],
+                      )
+                    ],
+                  ),
               ),
+            ),
               );
   }
 
