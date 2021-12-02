@@ -237,12 +237,12 @@ class _ArisState extends State<Aris> {
                                     .togglePlaceType('bank', val),
                                 selected: applicationBloc.placeType == 'bank',
                                 selectedColor: Colors.blue),
-                            Consumer<NotificationService>(
-                              builder: (context, model, _) => ElevatedButton(
-                                onPressed: () => model.imageNotification(),
-                                child: Text('Text'),
-                              ),
-                            ),
+                            // Consumer<NotificationService>(
+                            //   builder: (context, model, _) => ElevatedButton(
+                            //     onPressed: () => model.imageNotification(),
+                            //     child: Text('Text'),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
