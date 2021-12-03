@@ -12,3 +12,6 @@ $ flutter packages get
 ```
 
 Run the application and enjoy :tada: :rainbow:
+
+#Description
+Aris Maps is a web mapping platform and consumer application offered by ArisTech. It offers satellite imagery, aerial photography, street maps, 360° interactive panoramic views of streets (Street View), real-time traffic conditions, and route planning for traveling by foot, car, air (in beta) and public transportation.
