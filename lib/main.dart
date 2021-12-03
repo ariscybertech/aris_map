@@ -1,10 +1,8 @@
 import 'package:aris_map/aris/blocs/application_bloc.dart';
 import 'package:aris_map/aris/notifications/notification.dart';
 import 'package:aris_map/aris/screens/splash_screen.dart';
-import 'package:aris_map/aris/widgets/notification_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:aris_map/aris/screens/aris.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 
