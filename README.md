@@ -1,9 +1,6 @@
 # Flutter Aris Map Application
 
 <h1 align="center">Aris Maps</h1>
-<h3 align="center">
-Simple calculator
-</h3>
 
 <br />
  
