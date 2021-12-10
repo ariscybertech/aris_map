@@ -1,5 +1,3 @@
-# Flutter Aris Map Application
-
 <h1 align="center">Aris Maps</h1>
 
 <br />
