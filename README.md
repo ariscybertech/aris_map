@@ -1,6 +1,18 @@
 # Flutter Aris Map Application
 
-# Version :one:.:zero:.:zero::heavy_plus_sign::one::four:
+<h1 align="center">Aris Maps</h1>
+<h3 align="center">
+Simple calculator
+</h3>
+
+<br />
+ 
+<p align="center">
+  <img alt="app-store" src="https://github.com/plante-app-team/plante/blob/master/readme_resources/app-store.png" />
+  <img alt="google-play" src="https://github.com/plante-app-team/plante/blob/master/readme_resources/play-store.png" />
+</p>
+
+<br />
 
 ![Mobile Screenshot3](screenshots/screen.gif)
 
