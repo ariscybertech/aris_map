@@ -8,7 +8,7 @@
 </p>
 
 <br />
-
+ 
 ![Mobile Screenshot3](screenshots/screen.gif)
 
 ## Getting Started
